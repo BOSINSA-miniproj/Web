@@ -15,7 +15,7 @@ const LoadingScreen = () => {
 
   const textStyle = {
     color: 'white',
-    fontSize: '48px',
+    fontSize: '100px',
     fontWeight: 'bold',
     animation: 'fadeIn 3s ease-in-out',
   };
