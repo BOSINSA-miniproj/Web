@@ -26,14 +26,14 @@ const Step1Screen = ({ onNext }) => {
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#333',
+    background: 'linear-gradient(to top, #222 20%, #555 80%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
-    paddingTop: '80px',
+    gap: '10px',
   };
 
   const headerStyle = {
@@ -54,7 +54,7 @@ const Step1Screen = ({ onNext }) => {
     fontFamily: 'Arial, sans-serif',
     fontSize: '24px',
     fontWeight: 'bold',
-    textStroke: '1px white',
+    WebkitTextStroke: '1px white',
     color: 'white',
   };
 
@@ -67,8 +67,20 @@ const Step1Screen = ({ onNext }) => {
     textDecoration: 'none',
   };
 
+  const mainTextStyle = {
+    fontSize: '50px',
+    fontWeight: 'bold',
+    margin: '10px 0',
+  };
+
+  const subTextStyle = {
+    fontSize: '14px',
+    fontWeight: 'normal',
+    color: '#ccc',
+    margin: '5px 0',
+  };
+
   const inputStyle = {
-    margin: '10px',
     padding: '10px',
     fontSize: '16px',
     borderRadius: '4px',
@@ -77,18 +89,25 @@ const Step1Screen = ({ onNext }) => {
   };
 
   const buttonStyle = {
-    margin: '10px',
+    marginTop: '10px',
     padding: '10px 20px',
     fontSize: '16px',
-    color: '#333',
-    backgroundColor: 'white',
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: '#4CAF50',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '25px',
     cursor: 'pointer',
+    transition: 'transform 0.2s ease, color 0.2s ease',
+  };
+
+  const buttonHoverStyle = {
+    transform: 'scale(1.05)',
+    color: '#007BFF',
   };
 
   const imageStyle = {
-    marginTop: '20px',
+    marginTop: '10px',
     maxWidth: '300px',
     maxHeight: '300px',
     borderRadius: '8px',
@@ -104,17 +123,31 @@ const Step1Screen = ({ onNext }) => {
 
       {/* 본문 */}
       <div style={containerStyle}>
-        <h2>당신의 퍼스널 컬러를 진단해드릴게요</h2>
-        <input
-          type="text"
-          placeholder="이름"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={inputStyle}
-        />
-        <input type="file" accept="image/*" onChange={handleFileChange} style={inputStyle} />
+        <h2 style={mainTextStyle}>당신의 퍼스널 컬러를 진단해드릴게요</h2>
+        <p style={subTextStyle}>얼굴이 잘 나온 사진 한 장을 업로드 해주세요.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <input
+            type="text"
+            placeholder="이름"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={inputStyle}
+          />
+          <input type="file" accept="image/*" onChange={handleFileChange} style={inputStyle} />
+        </div>
         {uploadedImage && <img src={uploadedImage} alt="Uploaded Preview" style={imageStyle} />}
-        <button onClick={handleSubmit} style={buttonStyle}>
+        <button
+          onClick={handleSubmit}
+          style={buttonStyle}
+          onMouseOver={(e) => {
+            e.target.style.transform = buttonHoverStyle.transform;
+            e.target.style.color = buttonHoverStyle.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.color = 'white';
+          }}
+        >
           진단하기
         </button>
       </div>
