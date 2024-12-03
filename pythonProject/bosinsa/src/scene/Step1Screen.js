@@ -33,6 +33,38 @@ const Step1Screen = ({ onNext }) => {
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
+    paddingTop: '80px',
+  };
+
+  const headerStyle = {
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    backgroundColor: '#333',
+    color: 'white',
+    padding: '10px 20px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottom: '2px solid #444',
+    boxSizing: 'border-box',
+  };
+
+  const bosinsaStyle = {
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    textStroke: '1px white',
+    color: 'white',
+  };
+
+  const coordinatorStyle = {
+    fontSize: '16px',
+    fontWeight: 'normal',
+    background: 'linear-gradient(to right, #9734dd, #f9d5a2 70%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    textDecoration: 'none',
   };
 
   const inputStyle = {
@@ -63,22 +95,30 @@ const Step1Screen = ({ onNext }) => {
   };
 
   return (
-    <div style={containerStyle}>
-      <h1>BOSINSA</h1>
-      <p>당신의 퍼스널 컬러를 진단해드릴게요</p>
-      <input
-        type="text"
-        placeholder="이름"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        style={inputStyle}
-      />
-      <input type="file" accept="image/*" onChange={handleFileChange} style={inputStyle} />
-      {uploadedImage && <img src={uploadedImage} alt="Uploaded Preview" style={imageStyle} />}
-      <button onClick={handleSubmit} style={buttonStyle}>
-        진단하기
-      </button>
-    </div>
+    <>
+      {/* 헤더 */}
+      <div style={headerStyle}>
+        <div style={bosinsaStyle}>BOSINSA</div>
+        <div style={coordinatorStyle}>당신만의 코디네이터</div>
+      </div>
+
+      {/* 본문 */}
+      <div style={containerStyle}>
+        <h2>당신의 퍼스널 컬러를 진단해드릴게요</h2>
+        <input
+          type="text"
+          placeholder="이름"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={inputStyle}
+        />
+        <input type="file" accept="image/*" onChange={handleFileChange} style={inputStyle} />
+        {uploadedImage && <img src={uploadedImage} alt="Uploaded Preview" style={imageStyle} />}
+        <button onClick={handleSubmit} style={buttonStyle}>
+          진단하기
+        </button>
+      </div>
+    </>
   );
 };
 
