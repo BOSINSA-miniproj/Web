@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import LoadingScreen from './components/LoadingScreen';
+import Step1Screen from './scene/Step1Screen';
+import LoadingScreen from './scene/LoadingScreen';
+import DiagnosisLoadingScreen from './scene/DiagnosisLoadingScreen';
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [currentStep, setCurrentStep] = useState('loading');
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (currentStep === 'loading') {
+      const timer = setTimeout(() => {
+        setCurrentStep('step1');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentStep]);
+
+  const handleNextToDiagnosisLoading = () => {
+    setCurrentStep('diagnosisLoading');
+  };
 
   return (
     <div>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-            fontSize: '36px',
-            fontWeight: 'bold',
-          }}
-        >
-          메인 화면
-        </div>
-      )}
+      {currentStep === 'loading' && <LoadingScreen />}
+      {currentStep === 'step1' && <Step1Screen onNext={handleNextToDiagnosisLoading} />}
+      {currentStep === 'diagnosisLoading' && <DiagnosisLoadingScreen />}
     </div>
   );
 };
