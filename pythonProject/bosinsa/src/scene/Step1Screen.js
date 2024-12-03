@@ -26,7 +26,7 @@ const Step1Screen = ({ onNext }) => {
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    background: 'linear-gradient(to top, #222 20%, #555 80%)',
+    background: 'linear-gradient(to top, #000 20%, #555 80%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
