@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 const Step1Screen = ({ onNext }) => {
   const [name, setName] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [fileName, setFileName] = useState('');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      setFileName(file.name);
       const reader = new FileReader();
       reader.onload = () => {
         setUploadedImage(reader.result);
@@ -20,20 +22,20 @@ const Step1Screen = ({ onNext }) => {
       alert('이름과 사진을 모두 입력해주세요.');
       return;
     }
-    onNext();
+    onNext(name, uploadedImage, fileName);
   };
 
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    background: 'linear-gradient(to top, #000 20%, #555 80%)',
+    background: 'linear-gradient(to top, #222 20%, #555 80%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
-    gap: '10px',
+    gap: '10px', // 요소 간 간격 설정
   };
 
   const headerStyle = {
