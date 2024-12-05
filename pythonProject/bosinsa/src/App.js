@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Step1Screen from './scene/Step1Screen';
 import DiagnosisLoadingScreen from './scene/DiagnosisLoadingScreen';
-import LoadingScreen from './scene/LoadingScreen';
+import ResultScreen from './scene/ResultScreen';
 
 const App = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [fileName, setFileName] = useState('');
-
-  useEffect(() => {
-    if (step === 0) {
-      const timer = setTimeout(() => {
-        setStep(1);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [step]);
+  const [personalColor, setPersonalColor] = useState('');
 
   const handleNext = (name, uploadedImage, fileName) => {
     setName(name);
@@ -25,17 +17,25 @@ const App = () => {
     setStep(2);
   };
 
+  useEffect(() => {
+    if (step === 2) {
+      setTimeout(() => {
+        const samplePersonalColor = "Spring Warm";
+        setPersonalColor(samplePersonalColor);
+        setStep(3);
+      }, 3000);
+    }
+  }, [step]);
+
+  const handleShowMore = () => {
+    alert('다음 페이지로 이동합니다!');
+  };
+
   return (
     <>
-      {step === 0 && <LoadingScreen />} {}
-      {step === 1 && <Step1Screen onNext={handleNext} />} {}
-      {step === 2 && (
-        <DiagnosisLoadingScreen
-          name={name}
-          uploadedImage={uploadedImage}
-          fileName={fileName}
-        />
-      )} {}
+      {step === 1 && <Step1Screen onNext={handleNext} />}
+      {step === 2 && <DiagnosisLoadingScreen name={name} uploadedImage={uploadedImage} fileName={fileName} />}
+      {step === 3 && <ResultScreen name={name} personalColor={personalColor} onShowMore={handleShowMore} />}
     </>
   );
 };
