@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RecommendationScreen = ({ recommendations, personalColor }) => {
+const RecommendationScreen = ({ recommendations, personalColor, name }) => {
   const [currentRecommendation, setCurrentRecommendation] = useState(
     recommendations[0]
   );
@@ -11,27 +11,27 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
   };
 
   const styles = {
-    Spring: {
-      background: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
-      headerColor: '#F0EAD6',
+    spring: {
+      background: 'linear-gradient(to bottom, #FFF8E7, #F0C987)',
+      textColor: '#D2B48C',
     },
-    Summer: {
-      background: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
-      headerColor: '#B0C4DE',
+    summer: {
+      background: 'linear-gradient(to bottom, #D6E6F2, #6A9FE9)',
+      textColor: '#5F9EA0',
     },
-    Fall: {
-      background: 'linear-gradient(to bottom, #8B4513, #CD853F)',
-      headerColor: '#8B4513',
+    fall: {
+      background: 'linear-gradient(to bottom, #5E2605, #CD853F)',
+      textColor: '#5E2605',
     },
-    Winter: {
-      background: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
-      headerColor: '#FFFFFF',
+    winter: {
+      background: 'linear-gradient(to bottom, #FFFFFF, #B0B0B0)',
+      textColor: '#A9A9A9',
     },
   };
 
-  const currentStyle = styles[personalColor] || {
+  const currentStyle = styles[personalColor.toLowerCase()] || {
     background: '#333',
-    headerColor: '#333',
+    textColor: '#FFFFFF',
   };
 
   const containerStyle = {
@@ -42,18 +42,18 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'white',
     textAlign: 'center',
     gap: '20px',
     padding: '20px',
+    color: currentStyle.textColor,
   };
 
   const headerStyle = {
     position: 'fixed',
     top: 0,
     width: '100%',
-    backgroundColor: currentStyle.headerColor,
-    color: 'black',
+    backgroundColor: '#333',
+    color: 'white',
     padding: '10px 20px',
     display: 'flex',
     justifyContent: 'space-between',
@@ -66,8 +66,8 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
     fontFamily: 'Arial, sans-serif',
     fontSize: '24px',
     fontWeight: 'bold',
-    WebkitTextStroke: '1px black',
-    color: 'black',
+    WebkitTextStroke: '1px white',
+    color: 'white',
   };
 
   const coordinatorStyle = {
@@ -79,6 +79,12 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
     textDecoration: 'none',
   };
 
+  const mainTextStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+    margin: '10px 0',
+  };
+
   const imageStyle = {
     maxWidth: '300px',
     maxHeight: '300px',
@@ -86,7 +92,7 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
   };
 
   const hyperlinkStyle = {
-    color: '#00BFFF',
+    color: currentStyle.textColor,
     textDecoration: 'underline',
     fontSize: '16px',
   };
@@ -109,6 +115,16 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
     color: '#007BFF',
   };
 
+  const highlightStyle = {
+    color: currentStyle.textColor,
+    fontWeight: 'bold',
+  };
+
+  const nameStyle = {
+    color: '#000000',
+    fontWeight: 'bold',
+  };
+
   return (
     <>
       {/* 헤더 */}
@@ -119,7 +135,17 @@ const RecommendationScreen = ({ recommendations, personalColor }) => {
 
       {/* 본문 */}
       <div style={containerStyle}>
-        <p>{currentRecommendation.name}</p>
+        <p style={mainTextStyle}>
+          <span style={highlightStyle}>{personalColor}</span> 이신{' '}
+          <span style={nameStyle}>{name}</span>님에게
+        </p>
+        <p style={mainTextStyle}>
+          딱 맞는 옷은{' '}
+          <span style={{ color: '#FFA500', fontWeight: 'bold' }}>
+            {currentRecommendation.name}
+          </span>{' '}
+          입니다.
+        </p>
         <img
           src={currentRecommendation.image}
           alt="추천된 옷"

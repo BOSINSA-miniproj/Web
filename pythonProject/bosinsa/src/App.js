@@ -34,8 +34,8 @@ const App = () => {
     },
   ];
 
-  const handleNext = (name, uploadedImage, fileName) => {
-    setName(name);
+  const handleNext = (inputName, uploadedImage, fileName) => {
+    setName(inputName);
     setUploadedImage(uploadedImage);
     setFileName(fileName);
     setStep(2);
@@ -57,7 +57,9 @@ const App = () => {
 
   return (
     <>
+      {}
       {step === 1 && <Step1Screen onNext={handleNext} />}
+      {}
       {step === 2 && (
         <DiagnosisLoadingScreen
           name={name}
@@ -65,6 +67,7 @@ const App = () => {
           fileName={fileName}
         />
       )}
+      {}
       {step === 3 && (
         <ResultScreen
           name={name}
@@ -72,10 +75,12 @@ const App = () => {
           onShowMore={handleShowMore}
         />
       )}
+      {}
       {step === 4 && (
         <RecommendationScreen
           recommendations={recommendations}
           personalColor={personalColor}
+          name={name}
         />
       )}
     </>
