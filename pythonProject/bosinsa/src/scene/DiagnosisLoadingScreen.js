@@ -4,7 +4,7 @@ const DiagnosisLoadingScreen = ({name, uploadedImage, fileName}) => {
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#333',
+    background: 'linear-gradient(to bottom, #000000, #333333)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
