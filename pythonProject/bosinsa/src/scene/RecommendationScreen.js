@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RecommendationScreen = ({ recommendations, personalColor, name }) => {
+const RecommendationScreen = ({ recommendations, personalColor, name, uploadedImage }) => {
   const [currentRecommendation, setCurrentRecommendation] = useState(
     recommendations[0]
   );
@@ -35,8 +35,9 @@ const RecommendationScreen = ({ recommendations, personalColor, name }) => {
   };
 
   const containerStyle = {
-    width: '100vw',
+    width: '100%',
     height: '100vh',
+    overflowX: 'hidden',
     background: currentStyle.background,
     display: 'flex',
     flexDirection: 'column',
@@ -85,10 +86,19 @@ const RecommendationScreen = ({ recommendations, personalColor, name }) => {
     margin: '10px 0',
   };
 
+  const imagesContainerStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '20px', // 이미지 간 간격
+  };
+
   const imageStyle = {
-    maxWidth: '300px',
-    maxHeight: '300px',
+    maxWidth: '200px',
+    maxHeight: '200px',
     borderRadius: '8px',
+    objectFit: 'cover',
   };
 
   const hyperlinkStyle = {
@@ -137,20 +147,29 @@ const RecommendationScreen = ({ recommendations, personalColor, name }) => {
       <div style={containerStyle}>
         <p style={mainTextStyle}>
           <span style={highlightStyle}>{personalColor}</span> 이신{' '}
-          <span style={nameStyle}>{name}</span>님에게
+          <span style={nameStyle}>{name}</span>님에게 딱 맞는 옷은
         </p>
         <p style={mainTextStyle}>
-          딱 맞는 옷은{' '}
+          {' '}
           <span style={{ color: '#FFA500', fontWeight: 'bold' }}>
             {currentRecommendation.name}
           </span>{' '}
           입니다.
         </p>
-        <img
-          src={currentRecommendation.image}
-          alt="추천된 옷"
-          style={imageStyle}
-        />
+        <div style={imagesContainerStyle}>
+          {}
+          <img
+            src={uploadedImage}
+            alt="사용자 업로드 이미지"
+            style={imageStyle}
+          />
+          {}
+          <img
+            src={currentRecommendation.image}
+            alt="추천된 옷"
+            style={imageStyle}
+          />
+        </div>
         <a
           href={currentRecommendation.url}
           target="_blank"

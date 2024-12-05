@@ -47,7 +47,7 @@ const App = () => {
         const samplePersonalColor = "summer";
         setPersonalColor(samplePersonalColor);
         setStep(3);
-      }, 3000);
+      }, 5000);
     }
   }, [step]);
 
@@ -57,9 +57,7 @@ const App = () => {
 
   return (
     <>
-      {}
       {step === 1 && <Step1Screen onNext={handleNext} />}
-      {}
       {step === 2 && (
         <DiagnosisLoadingScreen
           name={name}
@@ -67,7 +65,6 @@ const App = () => {
           fileName={fileName}
         />
       )}
-      {}
       {step === 3 && (
         <ResultScreen
           name={name}
@@ -75,12 +72,12 @@ const App = () => {
           onShowMore={handleShowMore}
         />
       )}
-      {}
       {step === 4 && (
         <RecommendationScreen
           recommendations={recommendations}
           personalColor={personalColor}
           name={name}
+          uploadedImage={uploadedImage}
         />
       )}
     </>
