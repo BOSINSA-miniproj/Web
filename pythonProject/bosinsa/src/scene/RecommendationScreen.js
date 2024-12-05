@@ -44,7 +44,7 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    gap: '20px',
+    gap: '30px',
     padding: '20px',
     color: currentStyle.textColor,
   };
@@ -72,7 +72,7 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
   };
 
   const coordinatorStyle = {
-    fontSize: '16px',
+    fontSize: '18px',
     fontWeight: 'normal',
     background: 'linear-gradient(to right, #9734dd, #f9d5a2 70%)',
     WebkitBackgroundClip: 'text',
@@ -81,9 +81,9 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
   };
 
   const mainTextStyle = {
-    fontSize: '20px',
+    fontSize: '28px',
     fontWeight: 'bold',
-    margin: '10px 0',
+    margin: '0 0',
   };
 
   const imagesContainerStyle = {
@@ -91,12 +91,19 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '20px', // 이미지 간 간격
+    gap: '40px',
   };
 
-  const imageStyle = {
+  const userImageStyle = {
     maxWidth: '200px',
     maxHeight: '200px',
+    borderRadius: '8px',
+    objectFit: 'cover',
+  };
+
+  const recommendationImageStyle = {
+    maxWidth: '350px',
+    maxHeight: '350px',
     borderRadius: '8px',
     objectFit: 'cover',
   };
@@ -104,18 +111,18 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
   const hyperlinkStyle = {
     color: currentStyle.textColor,
     textDecoration: 'underline',
-    fontSize: '16px',
+    fontSize: '18px',
   };
 
   const buttonStyle = {
-    marginTop: '20px',
-    padding: '10px 20px',
-    fontSize: '16px',
+    marginTop: '10px',
+    padding: '15px 30px',
+    fontSize: '18px',
     fontWeight: 'bold',
     color: 'white',
     backgroundColor: '#4CAF50',
     border: 'none',
-    borderRadius: '25px',
+    borderRadius: '30px',
     cursor: 'pointer',
     transition: 'transform 0.2s ease, color 0.2s ease',
   };
@@ -157,17 +164,17 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
           입니다.
         </p>
         <div style={imagesContainerStyle}>
-          {}
+          {/* 사용자 업로드 이미지 */}
           <img
             src={uploadedImage}
             alt="사용자 업로드 이미지"
-            style={imageStyle}
+            style={userImageStyle}
           />
-          {}
+          {/* 추천된 옷 이미지 */}
           <img
             src={currentRecommendation.image}
             alt="추천된 옷"
-            style={imageStyle}
+            style={recommendationImageStyle}
           />
         </div>
         <a

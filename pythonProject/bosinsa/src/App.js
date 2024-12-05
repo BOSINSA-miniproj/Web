@@ -3,9 +3,10 @@ import Step1Screen from './scene/Step1Screen';
 import DiagnosisLoadingScreen from './scene/DiagnosisLoadingScreen';
 import ResultScreen from './scene/ResultScreen';
 import RecommendationScreen from './scene/RecommendationScreen';
+import LoadingScreen from './scene/LoadingScreen';
 
 const App = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [name, setName] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -34,6 +35,15 @@ const App = () => {
     },
   ];
 
+  useEffect(() => {
+    if (step === 0) {
+      const timer = setTimeout(() => {
+        setStep(1);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
   const handleNext = (inputName, uploadedImage, fileName) => {
     setName(inputName);
     setUploadedImage(uploadedImage);
@@ -57,7 +67,11 @@ const App = () => {
 
   return (
     <>
+      {/* 처음 로딩 화면 */}
+      {step === 0 && <LoadingScreen />}
+      {/* Step1Screen */}
       {step === 1 && <Step1Screen onNext={handleNext} />}
+      {/* 진단 로딩 화면 */}
       {step === 2 && (
         <DiagnosisLoadingScreen
           name={name}
@@ -65,6 +79,7 @@ const App = () => {
           fileName={fileName}
         />
       )}
+      {/* 결과 화면 */}
       {step === 3 && (
         <ResultScreen
           name={name}
@@ -72,6 +87,7 @@ const App = () => {
           onShowMore={handleShowMore}
         />
       )}
+      {/* 추천 화면 */}
       {step === 4 && (
         <RecommendationScreen
           recommendations={recommendations}
