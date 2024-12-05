@@ -4,7 +4,7 @@ const DiagnosisLoadingScreen = ({name, uploadedImage, fileName}) => {
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#333',
+    background: 'linear-gradient(to bottom, #000000, #333333)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -23,9 +23,25 @@ const DiagnosisLoadingScreen = ({name, uploadedImage, fileName}) => {
     marginBottom: '20px',
   };
 
+  const textContainerStyle = {
+    fontSize: '20px',
+    fontWeight: 'normal',
+    marginBottom: '20px',
+  };
+
+  const nameStyle = {
+    color: '#4CAF50',
+    fontWeight: 'bold',
+  };
+
   const textStyle = {
     fontSize: '20px',
     fontWeight: 'normal',
+  };
+
+  const fileNameStyle = {
+    color: '#FF5733',
+    fontWeight: 'bold',
   };
 
   const imageStyle = {
@@ -38,7 +54,10 @@ const DiagnosisLoadingScreen = ({name, uploadedImage, fileName}) => {
 
   return (
     <div style={containerStyle}>
-      <p style={textStyle}>{`${name}님의 ${fileName} 기준으로 퍼스널 컬러를 진단 중입니다. 기대해주세요!`}</p>
+      <p style={textContainerStyle}>
+        <span style={nameStyle}>{name}</span>님의{' '}
+        <span style={fileNameStyle}>{fileName}</span>을(를) 기준으로 퍼스널 컬러를 진단 중입니다. 기대해주세요!
+      </p>
       {uploadedImage && <img src={uploadedImage} alt="Uploaded" style={imageStyle} />}
       <div style={spinnerStyle}></div>
       <style>
@@ -52,15 +71,15 @@ const DiagnosisLoadingScreen = ({name, uploadedImage, fileName}) => {
             }
           }
           @keyframes fade {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.3;
-          }
-          100% {
-            opacity: 1;
-          }
+            0% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0.3;
+            }
+            100% {
+              opacity: 1;
+            }
           }
         `}
       </style>

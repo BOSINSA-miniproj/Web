@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const Step1Screen = ({ onNext }) => {
   const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [fileName, setFileName] = useState('');
 
@@ -18,11 +19,11 @@ const Step1Screen = ({ onNext }) => {
   };
 
   const handleSubmit = () => {
-    if (!name || !uploadedImage) {
-      alert('이름과 사진을 모두 입력해주세요.');
+    if (!name || !uploadedImage || !gender) {
+      alert('이름, 성별, 사진을 모두 입력해주세요.');
       return;
     }
-    onNext(name, uploadedImage, fileName);
+    onNext(name, gender, uploadedImage, fileName);
   };
 
   const containerStyle = {
@@ -35,7 +36,7 @@ const Step1Screen = ({ onNext }) => {
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
-    gap: '10px', // 요소 간 간격 설정
+    gap: '10px',
   };
 
   const headerStyle = {
@@ -115,6 +116,25 @@ const Step1Screen = ({ onNext }) => {
     borderRadius: '8px',
   };
 
+  const genderSelectStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: '10px',
+  };
+
+  const genderButtonStyle = (isSelected) => ({
+    padding: '10px 20px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: isSelected ? '#FFF' : '#4CAF50',
+    backgroundColor: isSelected ? '#4CAF50' : '#FFF',
+    border: `1px solid ${isSelected ? '#4CAF50' : '#FFF'}`,
+    borderRadius: '25px',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s ease, color 0.2s ease',
+  });
+
   return (
     <>
       {/* 헤더 */}
@@ -128,6 +148,20 @@ const Step1Screen = ({ onNext }) => {
         <h2 style={mainTextStyle}>당신의 퍼스널 컬러를 진단해드릴게요</h2>
         <p style={subTextStyle}>얼굴이 잘 나온 사진 한 장을 업로드 해주세요.</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={genderSelectStyle}>
+            <button
+              style={genderButtonStyle(gender === 'male')}
+              onClick={() => setGender('male')}
+            >
+              남성
+            </button>
+            <button
+              style={genderButtonStyle(gender === 'female')}
+              onClick={() => setGender('female')}
+            >
+              여성
+            </button>
+          </div>
           <input
             type="text"
             placeholder="이름"
