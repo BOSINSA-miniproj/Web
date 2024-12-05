@@ -1,17 +1,34 @@
 import React from 'react';
 
 const ResultScreen = ({ name, personalColor, onShowMore }) => {
-  const backgroundStyles = {
-    spring: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
-    summer: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
-    fall: 'linear-gradient(to bottom, #8B4513, #CD853F)',
-    winter: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
+  const styles = {
+    spring: {
+      background: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
+      textColor: '#D2B48C',
+    },
+    summer: {
+      background: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
+      textColor: '#5F9EA0',
+    },
+    fall: {
+      background: 'linear-gradient(to bottom, #8B4513, #CD853F)',
+      textColor: '#5E2605',
+    },
+    winter: {
+      background: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
+      textColor: '#A9A9A9',
+    },
+  };
+
+  const currentStyle = styles[personalColor] || {
+    background: '#333',
+    textColor: '#FFFFFF',
   };
 
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    background: backgroundStyles[personalColor] || '#333', // 퍼스널 컬러에 따른 배경색, 기본값은 어두운 색상
+    background: currentStyle.background,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -58,6 +75,11 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
     marginBottom: '10px',
   };
 
+  const resultTextStyle = {
+    color: currentStyle.textColor,
+    fontWeight: 'bold',
+  };
+
   const buttonStyle = {
     marginTop: '20px',
     padding: '10px 20px',
@@ -87,7 +109,7 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
       {/* 본문 */}
       <div style={containerStyle}>
         <p style={mainTextStyle}>
-          <span style={{ color: '#FF5733' }}>{personalColor}</span> 이신{' '}
+          <span style={resultTextStyle}>{personalColor}</span> 이신{' '}
           <span style={{ color: '#4CAF50' }}>{name}</span>님에게
         </p>
         <p style={mainTextStyle}>딱 맞는 옷을 준비했어요!</p>
