@@ -1,16 +1,24 @@
 import React from 'react';
 
 const ResultScreen = ({ name, personalColor, onShowMore }) => {
+  const backgroundStyles = {
+    spring: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
+    summer: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
+    fall: 'linear-gradient(to bottom, #8B4513, #CD853F)',
+    winter: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
+  };
+
   const containerStyle = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#333',
+    background: backgroundStyles[personalColor] || '#333', // 퍼스널 컬러에 따른 배경색, 기본값은 어두운 색상
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
+    transition: 'background 0.5s ease',
   };
 
   const headerStyle = {

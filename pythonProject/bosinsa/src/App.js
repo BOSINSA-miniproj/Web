@@ -20,7 +20,7 @@ const App = () => {
   useEffect(() => {
     if (step === 2) {
       setTimeout(() => {
-        const samplePersonalColor = "Spring Warm";
+        const samplePersonalColor = "summer";
         setPersonalColor(samplePersonalColor);
         setStep(3);
       }, 3000);
