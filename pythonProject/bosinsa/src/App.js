@@ -52,7 +52,7 @@ const App = () => {
   useEffect(() => {
     if (step === 2) {
       const timer = setTimeout(() => {
-        setPersonalColor('summer');
+        setPersonalColor('winter');
         setStep(3);
       }, 5000);
       return () => clearTimeout(timer);
