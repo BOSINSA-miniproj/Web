@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 
-const RecommendationScreen = ({ recommendations, personalColor, name, uploadedImage }) => {
-  const [currentRecommendation, setCurrentRecommendation] = useState(
-    recommendations[0]
-  );
+const RecommendationScreen = ({ recommendations, personalColor, name, uploadedImage, onRestart }) => {
+  const [currentRecommendationIndex, setCurrentRecommendationIndex] = useState(0); // 인덱스로 관리
 
   const handleNextRecommendation = () => {
-    const randomIndex = Math.floor(Math.random() * recommendations.length);
-    setCurrentRecommendation(recommendations[randomIndex]);
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * recommendations.length);
+    } while (randomIndex === currentRecommendationIndex);
+    setCurrentRecommendationIndex(randomIndex);
   };
+
+  const currentRecommendation = recommendations[currentRecommendationIndex]; // 현재 추천 항목
 
   const styles = {
     spring: {
@@ -127,6 +130,11 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
     transition: 'transform 0.2s ease, color 0.2s ease',
   };
 
+  const restartButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: '#FF4500',
+  };
+
   const buttonHoverStyle = {
     transform: 'scale(1.05)',
     color: '#007BFF',
@@ -185,20 +193,36 @@ const RecommendationScreen = ({ recommendations, personalColor, name, uploadedIm
         >
           상품 보러가기
         </a>
-        <button
-          style={buttonStyle}
-          onMouseOver={(e) => {
-            e.target.style.transform = buttonHoverStyle.transform;
-            e.target.style.color = buttonHoverStyle.color;
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = 'scale(1)';
-            e.target.style.color = 'white';
-          }}
-          onClick={handleNextRecommendation}
-        >
-          다른 옷 보기!
-        </button>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <button
+            style={buttonStyle}
+            onMouseOver={(e) => {
+              e.target.style.transform = buttonHoverStyle.transform;
+              e.target.style.color = buttonHoverStyle.color;
+            }}
+            onMouseOut={(e) => {
+              e.target.style.transform = 'scale(1)';
+              e.target.style.color = 'white';
+            }}
+            onClick={handleNextRecommendation}
+          >
+            다른 옷 보기!
+          </button>
+          <button
+            style={restartButtonStyle}
+            onMouseOver={(e) => {
+              e.target.style.transform = buttonHoverStyle.transform;
+              e.target.style.color = buttonHoverStyle.color;
+            }}
+            onMouseOut={(e) => {
+              e.target.style.transform = 'scale(1)';
+              e.target.style.color = 'white';
+            }}
+            onClick={onRestart}
+          >
+            다시 할래요!
+          </button>
+        </div>
       </div>
     </>
   );

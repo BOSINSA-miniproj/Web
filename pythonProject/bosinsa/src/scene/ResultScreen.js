@@ -3,24 +3,24 @@ import React from 'react';
 const ResultScreen = ({ name, personalColor, onShowMore }) => {
   const styles = {
     spring: {
-      background: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
-      textColor: '#D2B48C',
+      background: 'linear-gradient(to bottom, #E6D5B8, #A68F6C)',
+      textColor: '#8B6F47',
     },
     summer: {
-      background: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
-      textColor: '#5F9EA0',
+      background: 'linear-gradient(to bottom, #A4BED8, #5F8EA4)',
+      textColor: '#4A7D92',
     },
     fall: {
-      background: 'linear-gradient(to bottom, #8B4513, #CD853F)',
-      textColor: '#5E2605',
+      background: 'linear-gradient(to bottom, #704214, #4B2B0E)',
+      textColor: '#3A1F0B',
     },
     winter: {
-      background: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
-      textColor: '#A9A9A9',
+      background: 'linear-gradient(to bottom, #C0C0C0, #707070)',
+      textColor: '#505050',
     },
   };
 
-  const currentStyle = styles[personalColor] || {
+  const currentStyle = styles[personalColor.toLowerCase()] || {
     background: '#333',
     textColor: '#FFFFFF',
   };
@@ -70,9 +70,9 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
   };
 
   const mainTextStyle = {
-    fontSize: '24px',
+    fontSize: '45px',
     fontWeight: 'bold',
-    marginBottom: '10px',
+    marginBottom: '0',
   };
 
   const resultTextStyle = {

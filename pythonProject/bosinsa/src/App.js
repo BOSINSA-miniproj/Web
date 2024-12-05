@@ -37,9 +37,7 @@ const App = () => {
 
   useEffect(() => {
     if (step === 0) {
-      const timer = setTimeout(() => {
-        setStep(1);
-      }, 3000);
+      const timer = setTimeout(() => setStep(1), 3000);
       return () => clearTimeout(timer);
     }
   }, [step]);
@@ -53,16 +51,22 @@ const App = () => {
 
   useEffect(() => {
     if (step === 2) {
-      setTimeout(() => {
-        const samplePersonalColor = "summer";
-        setPersonalColor(samplePersonalColor);
+      const timer = setTimeout(() => {
+        setPersonalColor('summer');
         setStep(3);
       }, 5000);
+      return () => clearTimeout(timer);
     }
   }, [step]);
 
-  const handleShowMore = () => {
-    setStep(4);
+  const handleShowMore = () => setStep(4);
+
+  const handleRestart = () => {
+    setName('');
+    setUploadedImage(null);
+    setFileName('');
+    setPersonalColor('');
+    setStep(1);
   };
 
   return (
@@ -94,6 +98,7 @@ const App = () => {
           personalColor={personalColor}
           name={name}
           uploadedImage={uploadedImage}
+          onRestart={handleRestart}
         />
       )}
     </>
