@@ -1,28 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const ResultScreen = ({ name, personalColor, onShowMore }) => {
+const RecommendationScreen = ({ recommendations, personalColor }) => {
+  const [currentRecommendation, setCurrentRecommendation] = useState(
+    recommendations[0]
+  );
+
+  const handleNextRecommendation = () => {
+    const randomIndex = Math.floor(Math.random() * recommendations.length);
+    setCurrentRecommendation(recommendations[randomIndex]);
+  };
+
   const styles = {
-    spring: {
+    Spring: {
       background: 'linear-gradient(to bottom, #F0EAD6, #FFE4C4)',
-      textColor: '#D2B48C',
+      headerColor: '#F0EAD6',
     },
-    summer: {
+    Summer: {
       background: 'linear-gradient(to bottom, #B0C4DE, #ADD8E6)',
-      textColor: '#5F9EA0',
+      headerColor: '#B0C4DE',
     },
-    fall: {
+    Fall: {
       background: 'linear-gradient(to bottom, #8B4513, #CD853F)',
-      textColor: '#5E2605',
+      headerColor: '#8B4513',
     },
-    winter: {
+    Winter: {
       background: 'linear-gradient(to bottom, #FFFFFF, #E0E0E0)',
-      textColor: '#A9A9A9',
+      headerColor: '#FFFFFF',
     },
   };
 
   const currentStyle = styles[personalColor] || {
     background: '#333',
-    textColor: '#FFFFFF',
+    headerColor: '#333',
   };
 
   const containerStyle = {
@@ -35,15 +44,16 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
     alignItems: 'center',
     color: 'white',
     textAlign: 'center',
-    transition: 'background 0.5s ease',
+    gap: '20px',
+    padding: '20px',
   };
 
   const headerStyle = {
     position: 'fixed',
     top: 0,
     width: '100%',
-    backgroundColor: '#333',
-    color: 'white',
+    backgroundColor: currentStyle.headerColor,
+    color: 'black',
     padding: '10px 20px',
     display: 'flex',
     justifyContent: 'space-between',
@@ -56,8 +66,8 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
     fontFamily: 'Arial, sans-serif',
     fontSize: '24px',
     fontWeight: 'bold',
-    WebkitTextStroke: '1px white',
-    color: 'white',
+    WebkitTextStroke: '1px black',
+    color: 'black',
   };
 
   const coordinatorStyle = {
@@ -69,15 +79,16 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
     textDecoration: 'none',
   };
 
-  const mainTextStyle = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
+  const imageStyle = {
+    maxWidth: '300px',
+    maxHeight: '300px',
+    borderRadius: '8px',
   };
 
-  const resultTextStyle = {
-    color: currentStyle.textColor,
-    fontWeight: 'bold',
+  const hyperlinkStyle = {
+    color: '#00BFFF',
+    textDecoration: 'underline',
+    fontSize: '16px',
   };
 
   const buttonStyle = {
@@ -108,11 +119,20 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
 
       {/* 본문 */}
       <div style={containerStyle}>
-        <p style={mainTextStyle}>
-          <span style={resultTextStyle}>{personalColor}</span> 이신{' '}
-          <span style={{ color: '#4CAF50' }}>{name}</span>님에게
-        </p>
-        <p style={mainTextStyle}>딱 맞는 옷을 준비했어요!</p>
+        <p>{currentRecommendation.name}</p>
+        <img
+          src={currentRecommendation.image}
+          alt="추천된 옷"
+          style={imageStyle}
+        />
+        <a
+          href={currentRecommendation.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={hyperlinkStyle}
+        >
+          상품 보러가기
+        </a>
         <button
           style={buttonStyle}
           onMouseOver={(e) => {
@@ -123,13 +143,13 @@ const ResultScreen = ({ name, personalColor, onShowMore }) => {
             e.target.style.transform = 'scale(1)';
             e.target.style.color = 'white';
           }}
-          onClick={onShowMore}
+          onClick={handleNextRecommendation}
         >
-          보러가기!
+          다른 옷 보기!
         </button>
       </div>
     </>
   );
 };
 
-export default ResultScreen;
+export default RecommendationScreen;
